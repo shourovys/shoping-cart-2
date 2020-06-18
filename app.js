@@ -1,26 +1,36 @@
 
-var elements = document.getElementsByClassName("qun-plus");
+const plusElements = document.getElementsByClassName("qun-plus");
 
 
 
-for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('click', function (params) {
+for (var i = 0; i < plusElements.length; i++) {
+    plusElements[i].addEventListener('click', function (params) {
         // get amount
         const currentAmount = params.target.parentElement.parentElement.nextElementSibling.children[0].innerHTML;
         // make amount Float
         const currentAmountInt = parseFloat(currentAmount);
-        const addedAmount = currentAmountInt + currentAmountInt;
-        // update amount
-        params.target.parentElement.parentElement.nextElementSibling.children[0].innerHTML = addedAmount
-
 
         // get Qun
         const currentQun = params.target.parentElement.parentElement.children[1].value;
-        // make Qun Float
+        // make Qun Float + make upDate qun value
         const currentQunInt = parseFloat(currentQun);
         const addedQun = currentQunInt + 1;
+
+
+
+        // get single element price
+        const singleElementPrice = currentAmountInt / currentQunInt;
+        console.log(singleElementPrice);
+
         // update Qun
         params.target.parentElement.parentElement.children[1].value = addedQun
+
+
+
+
+        // update amount
+        const addedAmount = currentAmountInt + singleElementPrice;
+        params.target.parentElement.parentElement.nextElementSibling.children[0].innerHTML = addedAmount
 
     });
 
@@ -37,18 +47,31 @@ for (var i = 0; i < element.length; i++) {
         const currentAmount = params.target.parentElement.parentElement.nextElementSibling.children[0].innerHTML;
         // make amount Float
         const currentAmountInt = parseFloat(currentAmount);
-        const addedAmount = currentAmountInt - currentAmountInt;
-        // update amount
-        params.target.parentElement.parentElement.nextElementSibling.children[0].innerHTML = addedAmount
+
+
 
 
         // get Qun
         const currentQun = params.target.parentElement.parentElement.children[1].value;
         // make Qun Float
         const currentQunInt = parseFloat(currentQun);
-        const addedQun = currentQunInt - 1;
-        // update Qun
-        params.target.parentElement.parentElement.children[1].value = addedQun
+        if (currentQunInt > 1) {
+            const addedQun = currentQunInt - 1;
+            // update Qun
+            params.target.parentElement.parentElement.children[1].value = addedQun
+
+            // get single element price
+            const singleElementPrice = currentAmountInt / currentQunInt;
+
+
+
+
+            // update amount
+            const addedAmount = currentAmountInt - singleElementPrice;
+            params.target.parentElement.parentElement.nextElementSibling.children[0].innerHTML = addedAmount
+        }
+
+
 
     });
 }

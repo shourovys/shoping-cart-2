@@ -15,31 +15,31 @@ for (let i = 0; i < cartItemRemoveBtns.length; i++) {
 // function for Update total price
 function upDateTotalPrice() {
     let cartItems = document.getElementsByClassName("cart-items");
-    for (let i = 0; i < cartItems.length; i++) {
+    for (let i = 0; i < cartItems.length + 1; i++) {
         const cartItem = cartItems[i];
-
-        const elementPrice = cartItem.getElementsByClassName("element-price")[0].innerHTML;
-        const elementPriceInt = parseFloat(elementPrice);
-
-
-        const elementQun = cartItem.getElementsByClassName("element-qun")[0].defaultValue
-        const elementQunInt = parseFloat(elementQun);
+        if (cartItems.length > 0) {
+            const elementPrice = cartItem.getElementsByClassName("element-price")[i].innerHTML;
+            const elementPriceInt = parseFloat(elementPrice);
 
 
 
-        let totalPrices = document.getElementsByClassName("Total-prices")
 
-
-        for (let j = 0; j < totalPrices.length; j++) {
-
-            const i = document.getElementsByClassName("total-prices")[j].innerHTML //= elementPriceInt * elementQunInt
-
-            console.log(i);
+            let totalPrices = document.getElementsByClassName("Total-prices")
+            for (let j = 0; j < totalPrices.length; j++) {
+                const totalPrice = totalPrices[j]
+                totalPrice.innerHTML = "$" + elementPriceInt
+            }
+        }
+        else {
+            let totalPrices = document.getElementsByClassName("Total-prices")
+            for (let j = 0; j < totalPrices.length; j++) {
+                const totalPrice = totalPrices[j]
+                totalPrice.innerHTML = "$" + 0
+                alert("Are you went to remove all product")
+            }
 
         }
 
 
-
     }
-
 }
